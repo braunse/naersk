@@ -256,13 +256,13 @@ let
 
       # Remove the source path(s) in Rust
       if [ -n "$RUSTFLAGS" ]; then
-        RUSTFLAGS="$RUSTFLAGS --remap-path-prefix $crate_sources=/sources"
+        RUSTFLAGS="$RUSTFLAGS --remap-path-prefix $crate_sources=/sources --remap-path-prefix ${rustc}/lib/rustlib/src=/rust-src"
         log "RUSTFLAGS (updated): $RUSTFLAGS"
       elif [ -n "$CARGO_BUILD_RUSTFLAGS" ]; then
-        CARGO_BUILD_RUSTFLAGS="$CARGO_BUILD_RUSTFLAGS --remap-path-prefix $crate_sources=/sources"
+        CARGO_BUILD_RUSTFLAGS="$CARGO_BUILD_RUSTFLAGS --remap-path-prefix $crate_sources=/sources --remap-path-prefix ${rustc}/lib/rustlib/src=/rust-src"
         log "CARGO_BUILD_RUSTFLAGS (updated): $CARGO_BUILD_RUSTFLAGS"
       else
-        export CARGO_BUILD_RUSTFLAGS="--remap-path-prefix $crate_sources=/sources"
+        export CARGO_BUILD_RUSTFLAGS="--remap-path-prefix $crate_sources=/sources --remap-path-prefix ${rustc}/lib/rustlib/src=/rust-src"
         log "CARGO_BUILD_RUSTFLAGS (updated): $CARGO_BUILD_RUSTFLAGS"
       fi
 
